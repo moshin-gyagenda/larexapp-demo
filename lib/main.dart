@@ -1,51 +1,32 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
-import 'screens/profile_screen.dart';
-import 'screens/settings_screen.dart';
-import 'screens/login_screen.dart';
+import 'app_colors.dart';
+import 'screens/splash_screen.dart';
 
+// Campus Service Portal
+// Opens the splash screen, then welcome, login or register, then home.
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Campus Service Portal',
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
-    );
-  }
-}
-
-class MainScreen extends StatefulWidget {
-  @override
-  _MainScreenState createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  int _selectedItem = 0;
-  final List<Widget> _screens = [HomeScreen(), ProfileScreen(), SettingsScreen()];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedItem = index;
-    });
-  }
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child:  Scaffold(
-      body: _screens[_selectedItem],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedItem,
-        onTap: _onItemTapped,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
-        ],
+      theme: ThemeData(
+        useMaterial3: true,
+        scaffoldBackgroundColor: AppColors.background,
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppColors.blue,
+          foregroundColor: Colors.white,
+          centerTitle: true,
+        ),
       ),
-    ));
+      home: const SplashScreen(),
+    );
   }
 }
